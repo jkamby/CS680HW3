@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- hw3 build file Requires JDK's bin and ant's bin on command-line's 
+	path (check that javac and ant work on the command line). -->
+<project name="cs680hw3" default="build" basedir=".">
+	<property name="classes" location="bin" />
+
+	<path id="project.classpath">
+		<pathelement location="bin" />
+		<pathelement location="lib/junit-4.12.jar" />
+	</path>
+	<target name="init">
+		<mkdir dir="${classes}" />
+	</target>
+	<target name="clean">
+		<delete dir="${classes}" />
+	</target>
+	<target name="build" depends="init">
+		<echo message="${ant.project.name}: ${ant.file}" />
+		<javac destdir="${classes}" debug="on" includeantruntime="false">
+			<src path="src" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+	<target name="mainTest" depends="build">
+			<java fork="true" classname="Student" 
+				failonerror="true" dir="${basedir}">
+				<classpath refid="project.classpath"/>
+			</java>
+	</target>
+	<target name="mainTest2" depends="build">
+				<java fork="true" classname="Student2" 
+					failonerror="true" dir="${basedir}">
+					<classpath refid="project.classpath"/>
+				</java>
+			</target>
+</project>
